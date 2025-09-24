@@ -5,7 +5,7 @@ public class CypherRunner {
 		CaeserCypher cc = new CaeserCypher();
 		
 		CypherKey ck = cc.new CaeserCypherKeyImpl();
-		cc.setKey(ck);
+		cc.setCypherKey(ck, cc);
 		
 		String s = "Happy days";
 		String t = cc.encrypt(s);

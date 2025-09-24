@@ -1,6 +1,6 @@
 package ie.gmit.sw;
 
 public interface CypherKey{
- public void setKey(String key) throws CypherException;
- public String getKey();
+ public void setPattern(String key) throws CypherException;
+ public String getPattern();
 }

@@ -2,42 +2,15 @@ package ie.gmit.sw;
 
 import java.util.Iterator;
 
-public class CaeserCypher implements Cypherable {
+public class CaeserCypher extends AbstractCypher {
 
-	private CypherKey key;
-
-	public CypherKey getKey() {
-		return key;
-	}
-
-	public void setKey(CypherKey key) {
-		this.key = key;
-	}
-
-	public String encrypt(String plainText) throws CypherException {
-		return new String(encrypt(plainText.getBytes()));
-	}
-
-	public byte[] encrypt(byte[] plainText) throws CypherException {
-		doCypher(plainText, true);
-		return plainText;
-	}
-
-	public String decrypt(String cypherText) throws CypherException {
-		return new String(decrypt(cypherText.getBytes()));
-	}
-
-	public byte[] decrypt(byte[] cypherText) throws CypherException {
-		doCypher(cypherText, false);
-		return cypherText;
-	}
-
-	private byte[] doCypher(byte[] bytes, boolean encrypt) {
+	public byte[] doCypher(byte[] bytes, boolean encrypt) {
+		int k = Integer.parseInt(super.getCypherKey().getPattern());
 		for (int i = 0; i < bytes.length; i++) {
 			if (encrypt) {
-				bytes[i] += Integer.parseInt(key.getKey());
+				bytes[i] += k;
 			} else {
-				bytes[i] -= Integer.parseInt(key.getKey());
+				bytes[i] -= k;
 			}
 		}
 		
@@ -56,12 +29,12 @@ public class CaeserCypher implements Cypherable {
 		private int key;
 
 		@Override
-		public void setKey(String key) throws CypherException {
+		public void setPattern(String key) throws CypherException {
 			this.key = Integer.parseInt(key);
 		}
 
 		@Override
-		public String getKey() {
+		public String getPattern() {
 			return "" + key;
 		}
 
