@@ -4,7 +4,14 @@ public class VernamCypher extends AbstractCypher{
 
 	@Override
 	public byte[] doCypher(byte[] bytes, boolean encrypt) {
-		return null;
+		String key = super.getCypherKey().getPattern();
+		
+		for (int i = 0; i < bytes.length; i++) {
+			bytes[i] = (byte) (bytes[i] ^ key.charAt(i));
+		}
+		
+		return bytes;
+		
 	}
 
 }

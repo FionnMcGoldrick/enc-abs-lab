@@ -1,6 +1,9 @@
 package ie.gmit.sw;
 
 public interface Cypherable {
+	
+	CypherKey getCypherKey();
+	void setCypherKey(CypherKey cypherKey);
 
 	byte[] encrypt(byte[] plainText) throws CypherException;
 

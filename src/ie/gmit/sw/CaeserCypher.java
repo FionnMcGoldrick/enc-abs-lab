@@ -24,20 +24,4 @@ public class CaeserCypher extends AbstractCypher {
 		super.finalize();
 	}
 
-	public class CaeserCypherKeyImpl implements CypherKey {
-
-		private int key;
-
-		@Override
-		public void setPattern(String key) throws CypherException {
-			this.key = Integer.parseInt(key);
-		}
-
-		@Override
-		public String getPattern() {
-			return "" + key;
-		}
-
-	}
-
 }

@@ -24,8 +24,8 @@ public abstract class AbstractCypher implements Cypherable {
 		return key;
 	}
 
-	public void setCypherKey(CypherKey key, CaeserCypher caeserCypher) {
-		this.key = key;
+	public void setCypherKey(CypherKey cypherKey) {
+	    this.key = cypherKey;
 	}
 
 }
