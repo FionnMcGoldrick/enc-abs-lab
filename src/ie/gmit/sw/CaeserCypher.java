@@ -4,7 +4,15 @@ import java.util.Iterator;
 
 public class CaeserCypher {
 	
-	public int key;
+	private CypherKey key;
+
+	public CypherKey getKey() {
+		return key;
+	}
+
+	public void setKey(CypherKey key) {
+		this.key = key;
+	}
 
 	public String encrypt(String plainText) throws CypherException {
 		return new String(encrypt(plainText.getBytes()));
@@ -12,7 +20,7 @@ public class CaeserCypher {
 
 	public byte[] encrypt(byte[] plainText) throws CypherException {
 		for (int i = 0; i < plainText.length; i++) {
-			plainText[i] += key;
+			plainText[i] += Integer.parseInt(key.getKey());
 		}
 		return plainText;
 	}
@@ -23,7 +31,7 @@ public class CaeserCypher {
 
 	public byte[] decrypt(byte[] cypherText) throws CypherException {
 		for (int i = 0; i < cypherText.length; i++) {
-			cypherText[i] -= key;
+			cypherText[i] -= Integer.parseInt(key.getKey());
 		}
 		return cypherText;
 	}
@@ -34,5 +42,20 @@ public class CaeserCypher {
 		super.finalize();
 	}
 	
+	public class CypherKeyImpl implements CypherKey {
+		
+		private int key;
+
+		@Override
+		public void setKey(String key) throws CypherException {
+			this.key = Integer.parseInt(key);
+		}
+
+		@Override
+		public String getKey() {
+			return "" + key;
+		}
+		
+	}
 	
 }
