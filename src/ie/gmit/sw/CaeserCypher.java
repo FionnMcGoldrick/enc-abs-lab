@@ -2,8 +2,8 @@ package ie.gmit.sw;
 
 import java.util.Iterator;
 
-public class CaeserCypher {
-	
+public class CaeserCypher implements Cypherable {
+
 	private CypherKey key;
 
 	public CypherKey getKey() {
@@ -19,9 +19,7 @@ public class CaeserCypher {
 	}
 
 	public byte[] encrypt(byte[] plainText) throws CypherException {
-		for (int i = 0; i < plainText.length; i++) {
-			plainText[i] += Integer.parseInt(key.getKey());
-		}
+		doCypher(plainText, true);
 		return plainText;
 	}
 
@@ -30,10 +28,21 @@ public class CaeserCypher {
 	}
 
 	public byte[] decrypt(byte[] cypherText) throws CypherException {
-		for (int i = 0; i < cypherText.length; i++) {
-			cypherText[i] -= Integer.parseInt(key.getKey());
-		}
+		doCypher(cypherText, false);
 		return cypherText;
+	}
+
+	private byte[] doCypher(byte[] bytes, boolean encrypt) {
+		for (int i = 0; i < bytes.length; i++) {
+			if (encrypt) {
+				bytes[i] += Integer.parseInt(key.getKey());
+			} else {
+				bytes[i] -= Integer.parseInt(key.getKey());
+			}
+		}
+		
+		return bytes;
+
 	}
 
 	@SuppressWarnings("removal")
@@ -41,9 +50,9 @@ public class CaeserCypher {
 	protected void finalize() throws Throwable {
 		super.finalize();
 	}
-	
-	public class CypherKeyImpl implements CypherKey {
-		
+
+	public class CaeserCypherKeyImpl implements CypherKey {
+
 		private int key;
 
 		@Override
@@ -55,7 +64,7 @@ public class CaeserCypher {
 		public String getKey() {
 			return "" + key;
 		}
-		
+
 	}
-	
+
 }

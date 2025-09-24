@@ -4,7 +4,8 @@ public class CypherRunner {
 	public static void main(String[] args) throws CypherException {
 		CaeserCypher cc = new CaeserCypher();
 		
-		CypherKey ck = cc.new CypherKeyImpl();
+		CypherKey ck = cc.new CaeserCypherKeyImpl();
+		cc.setKey(ck);
 		
 		String s = "Happy days";
 		String t = cc.encrypt(s);
